@@ -4,7 +4,7 @@ News source seeker is a console application to retrieve URLS of news sources cur
 
 ## Build
 
-This project is written in [Google's Go programming language](https://golang.org/), because dependency management in Go is still in the early stages I have provided a Makefile with this project.
+This project is written in [Google's Go programming language](https://golang.org/) (Version 1.5.1), because dependency management in Go is still in the early stages I have provided a Makefile with this project.
 Building News Source Seeker should be as easy as executing the following terminal command inside the project's top directory on Linux or OSX.
 
 `make build`
