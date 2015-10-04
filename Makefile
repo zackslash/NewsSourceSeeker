@@ -10,7 +10,7 @@ default: build
 
 build:
 	go build -v -o ./bin/News_Source_Seeker ./src/
-	rsync -auv ./res/ ./bin/
+	cp -a ./res/ ./bin/
 
 doc:
     godoc -http=:6060 -index

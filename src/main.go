@@ -39,15 +39,24 @@ func main() {
 		os.Exit(0)
 	}
 	
-	searchURLs,_ := readLines("seeds.lst")
-	blackList,_ := readLines("blacklist.lst")
+	searchURLs,err := readLines("seeds.lst")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
+	}
+	
+	blackList,err := readLines("blacklist.lst")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
+	}
+	
 	urlRegex := regexp.MustCompile(validURLRegex)
 	
 	// Format query
 	query := parseArgQuery();
 
 	links := []string{}
-	
 	for _,searchURL := range searchURLs {
 		//Get domain level
 		seedDomain, _ := url.Parse(searchURL)
@@ -55,14 +64,14 @@ func main() {
 
 		searchURL = strings.Replace(searchURL, queryPlaceholder, query, 1)
 		resp, err := http.Get(searchURL)
-
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
 		}
-
+		
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
+		
 		parser := htmlparser.NewParser(string(body))
 		parser.Parse(nil, func(e *htmlparser.HtmlElement, isEmpty bool) {
 			if e.TagName == "a" {
