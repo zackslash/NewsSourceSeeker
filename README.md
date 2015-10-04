@@ -1,4 +1,4 @@
-# NewsSourceSeeker
+# News Source Seeker
 
 News source seeker is a console application to retrieve URLS of news sources currently reporting on a given subject, it does this by querying a list of popular news search engines and scraping the URL results.
 
